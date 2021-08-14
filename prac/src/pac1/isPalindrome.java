@@ -32,6 +32,19 @@ public class isPalindrome {
         return x == reverse.reverse(x);
     }
 
+    public boolean isPalindrome(String s) {
+        StringBuilder builder = new StringBuilder();
+        int length = s.length();
+        for (int i = 0; i < length; i++) {
+            Character c = s.charAt(i);
+            if (Character.isLetterOrDigit(c)) {
+                builder.append(Character.toLowerCase(c));
+            }
+        }
+        String reverse = new StringBuilder(builder).reverse().toString();
+        return reverse.equals(builder.toString());
+    }
+
 
     public static void main(String[] args) {
 
