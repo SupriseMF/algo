@@ -39,7 +39,10 @@ public class MinStack {
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      */
     Deque<Integer> xStack;
-    // 按照
+
+    /**
+     * 按照最小的栈上方中永远存着当前最小的数，内部也保存着同数据次序的次最小数
+     */
     Deque<Integer> minStack;
 
     public MinStack() {
