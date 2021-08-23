@@ -1,5 +1,8 @@
 package pac1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class maxSubArray {
 
     /**
@@ -23,15 +26,43 @@ public class maxSubArray {
      * @param nums
      * @return
      */
-    public int maxSubArray(int[] nums) {
+    public static int maxSubArray(int[] nums) {
+        /**
+         * 时间复杂度O(N)
+         * 空间复杂度O(1)
+         */
         int pre = 0;
         int maxAns = nums[0];
+        List<Integer> res = new ArrayList<>();
+        res.add(nums[0]);
+        List<Integer> ans = new ArrayList<>();
+        ans.add(nums[0]);
         for (int x : nums) {
+            if (pre + x > x) {
+                res.add(x);
+            } else {
+                res.clear();
+                res.add(x);
+            }
             pre = Math.max(pre + x, x);
+
+            if (pre > maxAns) {
+                ans.clear();
+                ans = new ArrayList<>(res);
+            }
             maxAns = Math.max(pre, maxAns);
 
         }
 
+        /**
+         * 打印最大子序和的组合、或者对应的下标
+         */
+        System.out.println(ans);
         return maxAns;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        System.out.println(maxSubArray(nums));
     }
 }
