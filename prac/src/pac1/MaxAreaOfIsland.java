@@ -32,6 +32,7 @@ public class MaxAreaOfIsland {
     }
 
     int dfs(int[][] grid, int i, int j){
+        // 边界处理
         if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0){
             return 0;
         }

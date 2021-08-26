@@ -39,9 +39,9 @@ public class numSquares {
         for (int i = 1; i <= n; i++) {
             int minPrev = Integer.MAX_VALUE;
             for (int j = 1; j * j <= i; j++) {
-                if (minPrev >= f[i - j * j]) {
+//                if (minPrev >= f[i - j * j]) {
                     minPrev = Math.min(minPrev, f[i - j * j]);
-                }
+//                }
             }
             f[i] = 1 + minPrev;
         }

@@ -25,7 +25,8 @@ public class getIntersectionNode {
      */
 
     /**
-     * 空间复杂度 O(1)O(1) 时间复杂度为 O(n)O(n)
+     * 空间复杂度 O(1)
+     * 时间复杂度 O(n)
      *
      * 这里使用图解的方式，解释比较巧妙的一种实现。
      *

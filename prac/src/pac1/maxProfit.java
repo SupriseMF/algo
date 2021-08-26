@@ -17,7 +17,7 @@ public class maxProfit {
         // 最大利润
         int max = 0;
         for (int i = 1; i < prices.length; i++) {
-            // 因为求最大利润，所以先计算最大利润，最终可减少一次循环
+            // 因为求最大利润，所以先计算最大利润，最终可减少一次比较
             max = Math.max(max, prices[i] - min);
             // 再计算最小历史
             min = Math.min(min, prices[i]);

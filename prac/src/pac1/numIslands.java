@@ -31,6 +31,7 @@ public class numIslands {
     public static int numIslands(char[][] grid) {
         /**
          * 由于有二维数组个点，故每个都要遍历一次
+         * 访问后，需要将相连的'1'合并成一个，count + 1
          *
          * 深度优先遍历
          * 时间复杂度O(M * N) 每个点都要到达一次

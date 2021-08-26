@@ -24,7 +24,9 @@ public class flatten {
      */
     public void flatten(TreeNode root) {
         List<TreeNode> list = new ArrayList<>();
+        // 先按照先序遍历，构造顺序
         preOrder(root, list);
+        // 再拼接成新🌲
         for (int i = 1; i < list.size(); i++) {
             TreeNode prev = list.get(i - 1);
             TreeNode cur = list.get(i);

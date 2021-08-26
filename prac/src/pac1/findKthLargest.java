@@ -65,23 +65,27 @@ public class findKthLargest {
      * @return
      */
     private int partition(int[] nums, int left, int right) {
+        // 随机以提高效率
         int randomIndex = RANDOM.nextInt(right - left + 1) + left;
         swap(nums, left, randomIndex);
 
         // 基准值
         int pivot = nums[left];
-        int lt = left;
+        int j = left;
         // 循环不变量：
-        // all in [left + 1, lt] < pivot
-        // all in [lt + 1, i) >= pivot
+        // all in [left + 1, j] < pivot
+        // all in [j + 1, i) >= pivot
         for (int i = left + 1; i <= right; i++) {
             if (nums[i] < pivot) {
-                lt++;
-                swap(nums, i, lt);
+                // 初值为 left，先右移，再交换，小于 pivot 的元素都被交换到前面
+                j++;
+                swap(nums, i, j);
             }
         }
-        swap(nums, left, lt);
-        return lt;
+        // 在之前遍历的过程中，满足 nums[left + 1..j] < pivot，并且 nums(j..i) >= pivot
+        swap(nums, left, j);
+        // 交换以后 nums[left..j - 1] < pivot, nums[j] = pivot, nums[j + 1..right] >= pivot
+        return j;
     }
 
     private void swap(int[] nums, int index1, int index2) {

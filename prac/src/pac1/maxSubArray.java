@@ -46,6 +46,7 @@ public class maxSubArray {
             }
             pre = Math.max(pre + x, x);
 
+            // 存储当前最大的元素
             if (pre > maxAns) {
                 ans.clear();
                 ans = new ArrayList<>(res);

@@ -24,13 +24,12 @@ public class isSameTree {
         if (p == null || q == null) {
             return false;
         }
-        if (p.val == q.val) {
-            boolean l = isSameTree(p.left, q.left);
-            boolean r = isSameTree(p.right, q.right);
-            return l && r;
-        } else {
+        if (p.val != q.val) {
             return false;
         }
+        boolean l = isSameTree(p.left, q.left);
+        boolean r = isSameTree(p.right, q.right);
+        return l && r;
 
     }
 }

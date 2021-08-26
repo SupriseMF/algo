@@ -5,23 +5,45 @@ import java.time.temporal.Temporal;
 public class OddEvenList {
 
 
+    /**
+     * 给定一个单链表，把所有的奇数节点和偶数节点分别排在一起。
+     * 请注意，这里的奇数节点和偶数节点指的是节点编号的奇偶性，而不是节点的值的奇偶性。
+     *
+     * 空间复杂度应为 O(1)
+     * 时间复杂度应为 O(nodes)，nodes 为节点总数。
+     *
+     * 输入: 2->1->3->5->6->4->7->NULL
+     * 输出: 2->3->6->7->1->5->4->NULL
+     *
+     * @param head
+     * @return
+     */
     public ListNode oddEvenList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
-        // head 为奇链表头结点，o 为奇链表尾节点
-        ListNode o = head;
-        // p 为偶链表头结点
-        ListNode p = head.next;
-        // e 为偶链表尾节点
-        ListNode e = p;
-        while (o.next != null && e.next != null) {
-            o.next = e.next;
-            o = o.next;
-            e.next = o.next;
-            e = e.next;
+        // head 为奇链表头结点，oddTail 为奇链表尾节点
+        ListNode oddTail = head;
+
+        // evenHead 为偶链表头结点
+        ListNode evenHead = head.next;
+        // evenTail 为偶链表尾节点
+        ListNode evenTail = evenHead;
+
+
+        while (oddTail.next != null && evenTail.next != null) {
+            // 奇数tail指向偶数tail的下一个
+            oddTail.next = evenTail.next;
+            // 更新奇数tail
+            oddTail = oddTail.next;
+
+            // 偶数tail指向奇数tail的下一个
+            evenTail.next = oddTail.next;
+            // 更新偶数tail
+            evenTail = evenTail.next;
         }
-        o.next = p;
+        // 最终要将奇数tail指向偶数head
+        oddTail.next = evenHead;
         return head;
     }
 
@@ -46,6 +68,11 @@ public class OddEvenList {
      * @return
      */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        /**
+         * 方法1：递归  时间复杂度O(M+N) 空间复杂度O(1)  ✔️
+         * 方法2：小堆  时间复杂度O(M) 空间复杂度O(M)
+         */
+        // 递归边界
         if (l1 == null) {
             return l2;
         }
@@ -62,7 +89,9 @@ public class OddEvenList {
             next = l1;
         }
 
+        // 将较小的节点将入res，递归计算next
         res.next = mergeTwoLists(res.next, next);
+        // 返回
         return res;
     }
 

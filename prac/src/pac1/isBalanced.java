@@ -34,6 +34,6 @@ public class isBalanced {
         if (Math.abs(left.dept - right.dept) > 1) {
             return new ReturnNode(0, false);
         }
-        return new ReturnNode(Math.max(left.dept , right.dept)+1, true);
+        return new ReturnNode(Math.max(left.dept, right.dept) + 1, true);
     }
 }

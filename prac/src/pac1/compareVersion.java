@@ -33,6 +33,7 @@ public class compareVersion {
         int v1Len = v1List.length - 1;
         int v2Len = v2List.length - 1;
         int j = 0;
+        // 现在l1上比较一遍
         for (int i = 0; i < v1List.length; i++) {
             int i1 = Integer.parseInt(v1List[i]);
 
@@ -49,6 +50,7 @@ public class compareVersion {
                 continue;
             }
         }
+        // 再在l2上走一遍，看剩余是否为0
         if (j <= v2Len) {
             boolean isZero = true;
             for (int i = j; i <= v2Len; i++) {

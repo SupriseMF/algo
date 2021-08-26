@@ -5,24 +5,33 @@ import java.util.Arrays;
 public class plusOne {
 
     /**
-     *  只要+1求余数，余数不等于0，
-     *  说明没有进位，直接返回。如果余数等于0，
-     *  说明有进位，遍历前一个数字，加1再求余数，以此循环。
-     *  如果for循环都遍历完了，说明最高位也有进位，则重新建立一个数组，初始化为0，
-     *  将第一位设置为1就可以了，因为，99、999之类的数字加一为100、1000
+     * 十进制
+     * digits数组每位按照整数顺序存数，进行 + 1 操作
+     * 实现进位
      * @param digits
      * @return
      */
     public int[] plusOne(int[] digits) {
+        /**
+         *  只要+1求余数，余数不等于0，
+         *  说明没有进位，直接返回。如果余数等于0，
+         *  说明有进位，遍历前一个数字，加1再求余数，以此循环。
+         *  如果for循环都遍历完了，说明最高位也有进位，则重新建立一个数组，初始化为0，
+         *  将第一位设置为1就可以了，因为，99、999之类的数字加一为100、1000
+         * @param digits
+         * @return
+         */
 
         for (int i = digits.length - 1; i >= 0; i--) {
             digits[i]++;
             digits[i] = digits[i] % 10;
 
+            // + 1后，若不等于0，说明无进位，直接return
             if (digits[i] != 0) {
                 return digits;
             }
         }
+        // 未return，说明有进位，0位置置1
         digits = new int[digits.length + 1];
         digits[0] = 1;
         return digits;
@@ -68,8 +77,10 @@ public class plusOne {
         //循环相加两个字符串相同长度的低位数部分
         while (i >= 0 && j >= 0) {
             int sum = carry;
+            // char不能直接转int，需 - 'a'的ASCII值
             sum += a.charAt(i--) - '0';
             sum += b.charAt(j--) - '0';
+            // 二进制
             carry = sum / 2;
             builder.append(sum % 2);
         }

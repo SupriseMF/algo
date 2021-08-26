@@ -13,15 +13,13 @@ public class minDistance {
      * 替换一个字符
      * 
      *
-     * 示例1：
-     *
      * 输入：word1 = "horse", word2 = "ros"
      * 输出：3
      * 解释：
      * horse -> rorse (将 'h' 替换为 'r')
      * rorse -> rose (删除 'r')
      * rose -> ros (删除 'e')
-     * 示例2：
+     *
      *
      * 输入：word1 = "intention", word2 = "execution"
      * 输出：5
@@ -46,7 +44,8 @@ public class minDistance {
          * 先找到最大相等子字符串
          * 在附近增、删、改字符
          *
-         * 编辑距离算法：
+         * 编辑距离算法
+         * 状态转移：
          * D[i][j] = 1 + min(D[i][j − 1], D[i − 1][j], D[i − 1][j−1])
          *
          */
@@ -54,6 +53,7 @@ public class minDistance {
         int n = word2.length();
         // 由于两个字符对比时，已位于(1, 1)位置，故(m, n)需要分别多一位
         int[][] dp = new int[m + 1][n + 1];
+        // dp边界及初始化
         dp[0][0] = 0;
         for (int i = 1; i < m + 1; i++) {
             dp[i][0] = i;

@@ -53,7 +53,7 @@ public class deleteDuplicates {
         if(head == null || head.next == null){
             return head;
         }
-        head.next = deleteDuplicates(head.next);
+        head.next = deleteDuplicatesRecursive(head.next);
         if(head.val == head.next.val) {
             head = head.next;
         }
@@ -66,7 +66,7 @@ public class deleteDuplicates {
         ListNode c = new ListNode(2, b);
         ListNode d = new ListNode(1, c);
         ListNode e = new ListNode(1, d);
-        ListNode res = deleteDuplicates(e);
+        ListNode res = deleteDuplicatesRecursive(e);
         while (res != null) {
             System.out.println(res.val);
             res = res.next;

@@ -28,6 +28,7 @@ public class buildTree {
 
         // 前序遍历中的第一个节点就是根节点
         int preorderRoot = preorderLeft;
+
         // 在中序遍历中定位根节点
         int inorderRoot = indexMap.get(preorder[preorderRoot]);
 

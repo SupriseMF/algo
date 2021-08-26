@@ -43,6 +43,7 @@ public class generateParenthesis {
             } else {
                 --balance;
             }
+            // 提前结束
             if (balance < 0) {
                 return false;
             }
@@ -89,13 +90,13 @@ public class generateParenthesis {
     }
 
     public static void main(String[] args) {
-        int a = 1;
+        int a = 3;
 
         res = generateParenthesis1(a);
         for (String re : res) {
-            if (valid(re.toCharArray())) {
+//            if (valid(re.toCharArray())) {
                 System.out.println(re);
-            }
+//            }
 
         }
 

@@ -29,7 +29,16 @@ public class isPalindrome {
         if (x < 0) {
             return false;
         }
-        return x == reverse.reverse(x);
+        return x == reverse(x);
+    }
+
+    public static int reverse(int x) {
+        long n = 0;
+        while (x != 0) {
+            n = n * 10 + x % 10;
+            x /= 10;
+        }
+        return (int) n;
     }
 
     public boolean isPalindrome(String s) {

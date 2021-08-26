@@ -27,12 +27,12 @@ public class maxProduct {
         for (int i = 1; i < length; ++i) {
             int max = maxF, min = minF;
             // 可能有负有正
-            // 更新最小最大
+            // 更新最大
             maxF = Math.max(max * nums[i], Math.max(nums[i], min * nums[i]));
-
-            minF = Math.min(min * nums[i], Math.min(nums[i], max * nums[i]));
-
+            // 更新最大ans
             ans = Math.max(maxF, ans);
+            // 更新最小
+            minF = Math.min(min * nums[i], Math.min(nums[i], max * nums[i]));
         }
         return ans;
     }

@@ -20,21 +20,11 @@ public class productExceptSelf {
          * 空间复杂度O(1)
          */
         int[] res = new int[nums.length];
-//        Arrays.fill(res, 1);
-//        for (int i = 0; i < nums.length; i++) {
-//            for (int j = 0; j < nums.length; j++) {
-//                if (i != j) {
-//                    res[j] *= nums[i];
-//                }
-//            }
-//        }
-
-
         /**
          * res[i] = num[0:i-1] * num[i+1:n]
          * 前缀 * 后缀
          */
-        // 前缀
+        // 计算前缀数组
         // 因为索引为 '0' 的元素左侧没有元素， 所以 res[0] = 1
         res[0] = 1;
         for (int i = 1; i < nums.length; i++) {
@@ -45,9 +35,9 @@ public class productExceptSelf {
         // 刚开始右边没有元素，所以 R = 1
         int r = 1;
         for (int j = nums.length - 1; j >= 0; j--) {
-            // 对于索引 i，左边的乘积为 answer[i]，右边的乘积为 R
+            // 对于索引 i，计算右缀，左边的乘积为 res[i]，右边的乘积为 R
             res[j] = res[j] * r;
-            //  R 需要包含右边所有的乘积，所以计算下一个结果时需要将当前值乘到 R 上
+            //  更新R 需要包含右边所有的乘积，所以计算下一个结果时需要将当前值乘到 R 上
             r *= nums[j];
         }
         return res;
