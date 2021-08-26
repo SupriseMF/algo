@@ -1,5 +1,8 @@
 package pac1;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 public class addTwoNumbers {
 
 
@@ -87,8 +90,9 @@ public class addTwoNumbers {
         }
         System.out.print("null");
         System.out.println();
+    }
 
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
         /**
          * 由于是链表节点，且逆序进行相加
          * 故使用栈，分别存储两个链表
