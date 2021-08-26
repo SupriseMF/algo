@@ -29,34 +29,6 @@ public class QuickSort3Ptr {
         }
 
         // 快速排序
-//        int randomIndex = RANDOM.nextInt(right - left + 1) + left;
-//        swap(nums, left, randomIndex);
-//
-//        // 三个指针
-//        // 循环不变量：
-//        // all in [left + 1, lt] < pivot
-//        // all in [lt + 1, i) = pivot
-//        // all in [gt, right] > pivot
-//        int pivot = nums[left];
-//        int lt = left;
-//        int gt = right + 1;
-//        int i = left + 1;
-//        while (i < gt) {
-//            // 当前值小时，lt右移，和i交换后，i右移
-//            if (nums[i] < pivot) {
-//                lt++;
-//                swap(nums, i, lt);
-//                i++;
-//            } else if (nums[i] == pivot) {
-//                // 相等时，i右移
-//                i++;
-//            } else {
-//                // 当前值大于时，gt左移，当前值插入后方
-//                gt--;
-//                swap(nums, i, gt);
-//            }
-//        }
-//        swap(nums, left, lt);
         int gt = partition(nums, left, right);
         // 以lt和gt为区间划分，大大减少两侧分治的区间
         quickSort(nums, left, gt - 1);
@@ -64,6 +36,13 @@ public class QuickSort3Ptr {
 
     }
 
+    /**
+     * 三轴快排
+     * @param nums
+     * @param left
+     * @param right
+     * @return
+     */
     private int partition(int[] nums, int left, int right) {
         int randomIndex = RANDOM.nextInt(right - left + 1) + left;
         swap(nums, left, randomIndex);

@@ -17,6 +17,7 @@ public class findKthLargest {
      * @return
      */
     public int findKthLargest(int[] nums, int k) {
+        // 查找第K大，即排序后，查找第nums.length - K的位置
         return quickSort(nums, 0, nums.length - 1, nums.length - k);
     }
 
@@ -56,6 +57,13 @@ public class findKthLargest {
         }
     }
 
+    /**
+     * 快排查找每次partition后，返回的位置即是最终的所在位置，即左侧永远小，右侧永远大
+     * @param nums
+     * @param left
+     * @param right
+     * @return
+     */
     private int partition(int[] nums, int left, int right) {
         int randomIndex = RANDOM.nextInt(right - left + 1) + left;
         swap(nums, left, randomIndex);
