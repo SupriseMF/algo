@@ -28,6 +28,7 @@ public class QuickSort1 {
             return;
         }
 
+        // 正序的第N位
         int pIndex = partition(nums, left, right);
         quickSort(nums, left, pIndex - 1);
         quickSort(nums, pIndex + 1, right);
@@ -52,24 +53,33 @@ public class QuickSort1 {
         }
     }
 
+    /**
+     * 分区
+     * 随机选择一个位置的值，作为中轴
+     * 中轴左侧的数均小，右侧的数均大
+     */
     private int partition(int[] nums, int left, int right) {
         int randomIndex = RANDOM.nextInt(right - left + 1) + left;
         swap(nums, left, randomIndex);
 
         // 基准值
         int pivot = nums[left];
-        int lt = left;
+        int pos = left;
         // 循环不变量：
         // all in [left + 1, lt] < pivot
         // all in [lt + 1, i) >= pivot
+        // 从left右侧开始比较
         for (int i = left + 1; i <= right; i++) {
+            // 值都比轴小，位置
             if (nums[i] < pivot) {
-                lt++;
-                swap(nums, i, lt);
+                pos++;
+                swap(nums, i, pos);
             }
         }
-        swap(nums, left, lt);
-        return lt;
+        // 轴值放在中间位置
+        swap(nums, left, pos);
+        // 返回轴所在位置
+        return pos;
     }
 
     private void swap(int[] nums, int index1, int index2) {

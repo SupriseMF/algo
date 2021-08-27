@@ -1,8 +1,7 @@
 package pac1;
 
 
-import java.util.Random;
-import java.util.Stack;
+import java.util.*;
 
 public class QuickSort3Ptr {
 
@@ -16,23 +15,25 @@ public class QuickSort3Ptr {
      * @param nums
      * @return
      */
-    public int[] sortArray(int[] nums) {
+    public static int[] sortArray(int[] nums) {
         int len = nums.length;
         quickSort(nums, 0, len - 1);
         return nums;
     }
 
-    private void quickSort(int[] nums, int left, int right) {
-        if (right-left<=INSERTION_SORT_THRESHOLD) {
-            insertionSort(nums, left, right);
-            return;
-        }
+    private static void quickSort(int[] nums, int left, int right) {
+//        if (right-left<=INSERTION_SORT_THRESHOLD) {
+//            insertionSort(nums, left, right);
+//            return;
+//        }
 
-        // 快速排序
-        int gt = partition(nums, left, right);
-        // 以lt和gt为区间划分，大大减少两侧分治的区间
-        quickSort(nums, left, gt - 1);
-        quickSort(nums, gt, right);
+        if (left < right) {
+            // 快速排序
+            int pos = partition(nums, left, right);
+            // 以lt和gt为区间划分，大大减少两侧分治的区间
+            quickSort(nums, left, pos - 1);
+            quickSort(nums, pos + 1, right);
+        }
 
     }
 
@@ -43,36 +44,37 @@ public class QuickSort3Ptr {
      * @param right
      * @return
      */
-    private int partition(int[] nums, int left, int right) {
+    private static int partition(int[] nums, int left, int right) {
         int randomIndex = RANDOM.nextInt(right - left + 1) + left;
         swap(nums, left, randomIndex);
 
         // 三个指针
         // 循环不变量：
-        // all in [left + 1, lt] < pivot
-        // all in [lt + 1, i) = pivot
-        // all in [gt, right] > pivot
+        // all in [left + 1, leftPos] < pivot
+        // all in [leftPos + 1, i) = pivot
+        // all in [pos, right] > pivot
         int pivot = nums[left];
-        int lt = left;
-        int gt = right + 1;
+        int leftPos = left;
+        // 从右侧开始
+        int pos = right + 1;
         int i = left + 1;
-        while (i < gt) {
-            // 当前值小时，lt右移，和i交换后，i右移
+        while (i < pos) {
+            // 当前值小时，leftPos右移，和i交换后，i右移
             if (nums[i] < pivot) {
-                lt++;
-                swap(nums, i, lt);
+                leftPos++;
+                swap(nums, i, leftPos);
                 i++;
             } else if (nums[i] == pivot) {
                 // 相等时，i右移
                 i++;
             } else {
                 // 当前值大于时，gt左移，当前值插入后方
-                gt--;
-                swap(nums, i, gt);
+                pos--;
+                swap(nums, i, pos);
             }
         }
-        swap(nums, left, lt);
-        return gt;
+        swap(nums, left, leftPos);
+        return pos;
     }
 
     /**
@@ -98,10 +100,19 @@ public class QuickSort3Ptr {
         }
     }
 
-    private void swap(int[] nums, int left, int right) {
+    private static void swap(int[] nums, int left, int right) {
         int temp = nums[left];
         nums[left] = nums[right];
         nums[right] = temp;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            list.add(RANDOM.nextInt(100) + 1);
+        }
+        System.out.println(Arrays.toString(sortArray(list.stream().mapToInt(Integer::intValue).toArray())));
     }
 
 

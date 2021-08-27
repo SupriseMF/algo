@@ -26,7 +26,7 @@ public class searchRange {
         int ans = nums.length;
         while (left <= right) {
             int mid = (left + right) / 2;
-            // lower== true时，值要》=目标，即可左找
+            // lower== true时，值要>=目标，即可左找
             // 否则，须继续向右查找
             if (nums[mid] > target || (lower && nums[mid] >= target)) {
                 right = mid - 1;

@@ -1,5 +1,7 @@
 package pac1;
 
+import java.util.Arrays;
+
 public class removeDuplicates {
 
     /**
@@ -43,12 +45,13 @@ public class removeDuplicates {
      * @param nums
      * @return
      */
-    public int removeDuplicates(int[] nums) {
+    public static int removeDuplicates(int[] nums) {
         if (nums.length <= 1) {
             return nums.length;
         }
         int p = 0;
         int q = p + 1;
+        // 快慢指针
         while (q < nums.length) {
             if (nums[p] != nums[q]) {
                 nums[p + 1] = nums[q];
@@ -57,9 +60,12 @@ public class removeDuplicates {
             q++;
 
         }
+        System.out.println(Arrays.toString(nums));
         return p + 1;
+    }
 
-
-
+    public static void main(String[] args) {
+        int[] nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+        System.out.println(removeDuplicates(nums));
     }
 }

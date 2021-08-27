@@ -1,6 +1,9 @@
 package pac1;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class QuickSort2Pivot {
@@ -13,20 +16,22 @@ public class QuickSort2Pivot {
 
     private static final Random RANDOM = new Random();
 
-    public int[] sortArray(int[] nums) {
+    public static int[] sortArray(int[] nums) {
         int len = nums.length;
         quickSort(nums, 0, len - 1);
         return nums;
     }
 
-    private void quickSort(int[] nums, int left, int right) {
+    private static void quickSort(int[] nums, int left, int right) {
         if (right-left<=INSERTION_SORT_THRESHOLD) {
             insertionSort(nums, left, right);
             return;
         }
-        int pIndex = partition(nums, left, right);
-        quickSort(nums, left, pIndex - 1);
-        quickSort(nums, pIndex + 1, right);
+        if (left < right) {
+            int pos = partition(nums, left, right);
+            quickSort(nums, left, pos - 1);
+            quickSort(nums, pos + 1, right);
+        }
     }
 
     /**
@@ -35,7 +40,7 @@ public class QuickSort2Pivot {
      * @param left
      * @param right
      */
-    private void insertionSort(int[] nums, int left, int right) {
+    private static void insertionSort(int[] nums, int left, int right) {
         for (int i = left + 1; i <= right; i++) {
             int temp = nums[i];
             int j = i;
@@ -55,36 +60,45 @@ public class QuickSort2Pivot {
      * @param right
      * @return
      */
-    private int partition(int[] nums, int left, int right) {
+    private static int partition(int[] nums, int left, int right) {
         int randomIndex = left + RANDOM.nextInt(right - left + 1);
         swap(nums, randomIndex, left);
         int pivot = nums[left];
-        int lt = left + 1;
+        int pos = left + 1;
         int gt = right;
         while (true) {
-            while (lt <= right && nums[lt] < pivot) {
-                lt++;
+            while (pos <= right && nums[pos] < pivot) {
+                pos++;
             }
             while (gt > left && nums[gt] > pivot) {
                 gt--;
             }
-            if (lt >= gt) {
+            if (pos >= gt) {
                 break;
             }
-            swap(nums, lt, gt);
-            lt++;
+            swap(nums, pos, gt);
+            pos++;
             gt--;
         }
-        swap(nums, left, gt);
-        return gt;
+        // 由于此时pos >= gt，故需是上一位，故pos = pos - 1
+        swap(nums, left, pos - 1);
+        return pos - 1;
     }
 
-    private void swap(int[] nums, int index1, int index2) {
+    private static void swap(int[] nums, int index1, int index2) {
         int temp = nums[index1];
         nums[index1] = nums[index2];
         nums[index2] = temp;
     }
 
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            list.add(RANDOM.nextInt(100) + 1);
+        }
+        System.out.println(Arrays.toString(sortArray(list.stream().mapToInt(Integer::intValue).toArray())));
+    }
 
 
 }
