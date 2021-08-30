@@ -57,8 +57,33 @@ public class lengthOfLongestSubstring {
         return ans;
     }
 
+    public static int lengthOfLongestSubstring1(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        // 位置从0开始
+        int index = 0;
+        int maxLength = 0;
+        Set<Character> set = new HashSet<>();
+        int n = s.toCharArray().length;
+        for (int i = 0; i < s.toCharArray().length; i++) {
+            // i右移时，需要移除字符
+            // 除非第一个
+            if (i != 0) {
+                set.remove(s.charAt(i));
+            }
+            while (index < n && !set.contains(s.charAt(index))) {
+                set.add(s.charAt(index));
+                index++;
+            }
+            maxLength = Math.max(maxLength, index - i);
+        }
+
+        return maxLength;
+    }
+
     public static void main(String[] args) {
         String s = "abcabcdbb";
-        System.out.println(lengthOfLongestSubstring(s));
+        System.out.println(lengthOfLongestSubstring1(s));
     }
 }

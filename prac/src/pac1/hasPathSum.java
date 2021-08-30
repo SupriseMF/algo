@@ -30,4 +30,16 @@ public class hasPathSum {
         // 返回是否存在
         return left || right;
     }
+
+    public boolean hasPathSum1(TreeNode root, int targetSum){
+        if (root == null) {
+            return false;
+        }
+        if (root.left == null &&root.right == null && root.val == targetSum) {
+            return true;
+        }
+        return hasPathSum1(root.left, targetSum - root.val) || hasPathSum1(root.right, targetSum - root.val);
+
+    }
+
 }

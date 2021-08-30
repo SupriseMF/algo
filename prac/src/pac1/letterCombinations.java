@@ -1,5 +1,7 @@
 package pac1;
 
+import jdk.nashorn.internal.ir.IfNode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,8 +90,32 @@ public class letterCombinations {
         }
     }
 
+    public static List<String> letterCombinations1(String digits) {
+        if (digits == null || digits.length() == 0) {
+            return new ArrayList<>();
+        }
+        List<String> rs = new ArrayList<>();
+        doCombo(rs, digits, 0, new StringBuffer());
+        return rs;
+    }
+
+    private static void doCombo(List<String> rs, String digits, int index, StringBuffer combination) {
+        // 结束条件
+        if (combination.length() == digits.length()) {
+            rs.add(combination.toString());
+        } else {
+            String val = keyMap.get(digits.charAt(index));
+            for (int i = 0; i < val.length(); i++) {
+                combination.append(val.charAt(i));
+                doCombo(rs, digits, index + 1, combination);
+                combination.deleteCharAt(combination.length() - 1);
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
-        List<String> res = letterCombinations("234");
+        List<String> res = letterCombinations1("23");
         System.out.println(res.size());
         for (String re : res) {
             System.out.println(re);

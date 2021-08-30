@@ -60,5 +60,21 @@ public class isValidBST {
         return isBST(node.left, lower, node.val) && isBST(node.right, node.val, upper);
     }
 
+    public static boolean isValidBST1(TreeNode root) {
+
+        return checkTree(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private static boolean checkTree(TreeNode node, long min, long max) {
+        if (node == null) {
+            return true;
+        }
+        // 相等看情况，一般不能相等
+        if (node.val <= min ||node.val >= max) {
+            return false;
+        }
+        return checkTree(node.left, min, node.val) && checkTree(node.right, node.val, max);
+    }
+
 
 }

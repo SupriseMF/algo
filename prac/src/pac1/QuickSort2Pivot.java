@@ -1,10 +1,7 @@
 package pac1;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class QuickSort2Pivot {
 
@@ -17,8 +14,9 @@ public class QuickSort2Pivot {
     private static final Random RANDOM = new Random();
 
     public static int[] sortArray(int[] nums) {
-        int len = nums.length;
-        quickSort(nums, 0, len - 1);
+//        int len = nums.length;
+//        quickSort(nums, 0, len - 1);
+        sort1(nums);
         return nums;
     }
 
@@ -31,6 +29,48 @@ public class QuickSort2Pivot {
             int pos = partition(nums, left, right);
             quickSort(nums, left, pos - 1);
             quickSort(nums, pos + 1, right);
+        }
+    }
+
+    public static void sort(int[] data) {
+        if (data == null) {
+            return;
+        }
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
+        stack.push(data.length - 1);
+        while (!stack.isEmpty()) {
+            int right = stack.pop();
+            int left = stack.pop();
+            // 至少需要两个元素
+            if (right - left > 1) {
+//                int p = left + (right - left) / 2;
+                int p = partition(data, left, right);
+                stack.push(left);
+                stack.push(p);
+                stack.push(p + 1);
+                stack.push(right);
+            }
+        }
+    }
+
+    public static void sort1(int[] nums) {
+        if (nums == null) {
+            return;
+        }
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
+        stack.push(nums.length - 1);
+        while (!stack.isEmpty()) {
+            int right = stack.pop();
+            int left = stack.pop();
+            if (right - left > 1) {
+                int p = partition1(nums, left, right);
+                stack.push(left);
+                stack.push(p);
+                stack.push(p + 1);
+                stack.push(right);
+            }
         }
     }
 
@@ -64,26 +104,51 @@ public class QuickSort2Pivot {
         int randomIndex = left + RANDOM.nextInt(right - left + 1);
         swap(nums, randomIndex, left);
         int pivot = nums[left];
-        int pos = left + 1;
+        int lt = left + 1;
         int gt = right;
         while (true) {
-            while (pos <= right && nums[pos] < pivot) {
-                pos++;
+            while (lt <= right && nums[lt] < pivot) {
+                lt++;
             }
             while (gt > left && nums[gt] > pivot) {
                 gt--;
             }
-            if (pos >= gt) {
+            if (lt >= gt) {
                 break;
             }
-            swap(nums, pos, gt);
-            pos++;
+            swap(nums, lt, gt);
+            lt++;
             gt--;
         }
         // 由于此时pos >= gt，故需是上一位，故pos = pos - 1
-        swap(nums, left, pos - 1);
-        return pos - 1;
+        swap(nums, left, lt - 1);
+        return lt - 1;
     }
+
+    private static int partition1(int[] nums, int left, int right) {
+        int random = RANDOM.nextInt(right - left + 1) + left;
+        swap(nums, left, random);
+        int pivot = nums[left];
+        int lt = left + 1;
+        int gt = right;
+        while (true) {
+            while (lt <= right && nums[lt] < pivot) {
+                lt++;
+            }
+            while (gt > lt && nums[gt] > pivot) {
+                gt--;
+            }
+            if (lt >= gt) {
+                break;
+            }
+            swap(nums, lt, gt);
+            lt++;
+            gt--;
+        }
+        swap(nums, left, lt - 1);
+        return lt - 1;
+    }
+
 
     private static void swap(int[] nums, int index1, int index2) {
         int temp = nums[index1];

@@ -39,18 +39,36 @@ public class isValid {
             }
             if (equals(stack.peek(), s.charAt(i))) {
                 stack.pop();
-
             } else {
                 stack.push(s.charAt(i));
             }
-
         }
-
         return stack.isEmpty();
 
     }
 
     private  boolean equals(Character a, Character b) {
         return (a == '(' && b == ')') || (a == '[' && b == ']') || (a == '{' && b == '}');
+    }
+
+    public boolean isValidBrackets(String s) {
+        if (s == null || s.length() == 0) {
+            return false;
+        }
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < s.toCharArray().length; i++) {
+            if (stack.isEmpty()) {
+                stack.push(s.charAt(i));
+                continue;
+            }
+            if (equals(stack.peek(), s.charAt(i))) {
+                stack.pop();
+                continue;
+            } else {
+                stack.push(s.charAt(i));
+            }
+        }
+        return stack.isEmpty();
     }
 }

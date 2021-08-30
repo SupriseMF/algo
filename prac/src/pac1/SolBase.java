@@ -5,7 +5,10 @@ import jdk.nashorn.internal.ir.ReturnNode;
 public class SolBase {
 
     public static void main(String[] args) {
-        System.out.println(rand10());
+        for (int i = 0; i < 50; i++) {
+            System.out.println(rand10());
+        }
+
     }
 
     public static int rand10() {

@@ -65,7 +65,7 @@ public class longestCommonSubsequence {
                 char cj = text2.charAt(j - 1);
                 if (ci == cj) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
-                    map.put(dp[i][j], map.get(dp[i - 1][j - 1]) + ci);
+
                 } else {
                     dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
                 }
@@ -75,9 +75,46 @@ public class longestCommonSubsequence {
         return dp[m][n];
     }
 
+    /**
+     *  边界：
+     *  1、i=0时，dp[0][j] = 0
+     *  2、j=0时，dp[i][0] = 0
+     *
+     *  转移方程:
+     *
+     *  dp[i-1][j-1]再增加一个公共字符后：
+     *  text1[i-1] == text2[j-1]时，dp[i][j] = dp[i-1][j-1]+1
+     *  text1[i-1] != text2[j-1]时，dp[i][j] = Math.max{dp[i][j-1], dp[i-1][j]}
+     * @param text1
+     * @param text2
+     * @return
+     */
+    public static int longestCommonSubsequence1(String text1, String text2) {
+        int m = text1.length();
+        int n = text2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 0; i < n; i++) {
+            dp[0][i] = 0;
+        }
+        for (int i = 0; i < m; i++) {
+            dp[i][0] = 0;
+        }
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+                }
+
+            }
+        }
+        return dp[m][n];
+    }
+
     public static void main(String[] args) {
         String a = "abcddab";
         String b = "bdcaba";
-        System.out.println(longestCommonSubsequence(a, b));
+        System.out.println(longestCommonSubsequence1(a, b));
     }
 }

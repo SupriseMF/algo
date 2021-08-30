@@ -32,4 +32,20 @@ public class isSameTree {
         return l && r;
 
     }
+
+    public boolean isSameTree1(TreeNode p, TreeNode q){
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p == null) {
+            return false;
+        }
+        if (q == null) {
+            return false;
+        }
+        if (q.val != p.val) {
+            return false;
+        }
+        return isSameTree1(p.left, q.left) && isSameTree1(p.right, q.right);
+    }
 }

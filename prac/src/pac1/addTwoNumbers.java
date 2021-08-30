@@ -18,11 +18,6 @@ public class addTwoNumbers {
      * 输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
      * 输出：[8,9,9,9,0,0,0,1]
      *
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
-
-public class addTwoNumbers {
 
     /**
      * 给你两个 非空 链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储一位数字。将这两数相加会返回一个新的链表。

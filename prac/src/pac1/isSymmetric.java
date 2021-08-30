@@ -56,4 +56,28 @@ public class isSymmetric {
         return dfs(left.left, right.right) && dfs(left.right, right.left);
 
     }
+
+    public boolean isSymmetric1(TreeNode root){
+        // root null具体分析
+        if (root == null) {
+            return false;
+        }
+        return treeMatch(root.left, root.right);
+    }
+
+    private boolean treeMatch(TreeNode left, TreeNode right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null) {
+            return false;
+        }
+        if (right == null) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        return treeMatch(left.left, right.right) && treeMatch(left.right, right.left);
+    }
 }

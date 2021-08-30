@@ -1,6 +1,7 @@
 package pac1;
 
 import com.sun.deploy.util.StringUtils;
+import jdk.nashorn.internal.ir.IfNode;
 
 public class longestCommonPrefix {
 
@@ -10,21 +11,13 @@ public class longestCommonPrefix {
      *
      * 如果不存在公共前缀，返回空字符串""。
      *
-     * 
-     *
-     * 示例 1：
-     *
      * 输入：strs = ["flower","flow","flight"]
      * 输出："fl"
-     * 示例 2：
      *
      * 输入：strs = ["dog","racecar","car"]
      * 输出：""
      * 解释：输入不存在公共前缀。
      *
-     * 来源：力扣（LeetCode）
-     * 链接：https://leetcode-cn.com/problems/longest-common-prefix
-     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      * @param strs
      * @return
      */
@@ -45,5 +38,22 @@ public class longestCommonPrefix {
             }
         }
         return s;
+    }
+
+    public String longestCommonPrefix1(String[] strs) {
+        if (strs == null || strs.length == 0) {
+            return "";
+        }
+        String prefix = strs[0];
+        for (int i = 0; i < strs.length; i++) {
+            String str = strs[i];
+            while (!str.startsWith(prefix)) {
+                if (prefix.length() == 0) {
+                    return "";
+                }
+                prefix = prefix.substring(0, prefix.length() - 1);
+            }
+        }
+        return prefix;
     }
 }

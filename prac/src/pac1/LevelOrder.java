@@ -50,4 +50,22 @@ public class LevelOrder {
         traversal(node.left, res, level + 1);
         traversal(node.right, res, level + 1);
     }
+
+    public List<List<Integer>> levelOrder1(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        levelTravel(res, 0, root);
+        return res;
+    }
+
+    public void levelTravel(List<List<Integer>> res, int level, TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        if (res.size() == level) {
+            res.add(new ArrayList<>());
+        }
+        res.get(level).add(node.val);
+        levelTravel(res, level + 1, node.left);
+        levelTravel(res, level + 1, node.right);
+    }
 }
