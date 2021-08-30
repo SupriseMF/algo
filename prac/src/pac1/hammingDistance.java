@@ -26,14 +26,19 @@ public class hammingDistance {
          *
          * 移位实现位计数
          */
-//        int count = Integer.bitCount(x ^ y);
         return bitCount(x ^ y);
     }
 
+    /**
+     * 计算二进制中有多少1
+     * @param x
+     * @return
+     */
     private static int bitCount(int x) {
         int bitCount = 0;
         while (x != 0) {
             bitCount += x & 1;
+            // 右移
             x = x >> 1;
         }
         return bitCount;

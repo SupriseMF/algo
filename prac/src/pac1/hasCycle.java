@@ -46,6 +46,24 @@ public class hasCycle {
 
     }
 
+    public boolean hasCycle1(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode fast = head.next;
+        ListNode slow = head;
+        while (slow != fast) {
+            //若无环，则走到此处
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return true;
+
+    }
+
     /**
      * 使用快慢指针
      * O(1)空间复杂度
